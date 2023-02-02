@@ -225,7 +225,7 @@ class Voiture {
         $this->_marque = $marque;
         $this->_modele = $modele;
         $this->_nbPortes = $nbPortes;
-        $this->_vitesseActuelle=$vitesseActuelle; 
+        $this->_vitesseActuelle=0; 
         $this->statut=$statut;
     }
 
@@ -279,9 +279,10 @@ class Voiture {
         }
     }
     
-    public function accelerer($vitesseActuelle= null){
+    public function accelerer($vitesseActuelle){
         if ($this->statut == true){
-            echo "La voiture ".$this->_marque." ".$this->_modele." accélère de ".$this->_vitesseActuelle=$this->_vitesseActuelle+$vitesseActuelle ."<br>";
+            $this->_vitesseActuelle+=$vitesseActuelle;
+            echo "La voiture ".$this->_marque." ".$this->_modele." accélère de ".$vitesseActuelle.". LA vitesse est alors de ".$this->get_vitesseActuelle()."<br>";
         
         }elseif ($this->statut == false){
                 echo "Pour accélerer, il faut démarrer la voiture ".$this->_marque." ".$this->_modele ."<br>";
@@ -323,8 +324,10 @@ $v1= new voiture ("Peugeot","408",5,10,true);
 echo $v1->get_marque()." ".$v1->get_modele()." a ".$v1->get_nbPortes()."  ".$v1->get_vitesseActuelle()."<br>";
 $v1->demarrer();
 $v1->stopper();
-$v1->accelerer();
-echo $v1->set_vitesseActuelle(50);
+$v1->accelerer(20);
+$v1->accelerer(30);
+var_dump($v1);
+
 $v2=new voiture ("Citroen","C4",3,10);
 //var_dump($v2);
 $v2->demarrer();
